@@ -349,11 +349,17 @@ Examples of inputs and outputs into machine learning algorithms
 ## 
 
 <section data-background-video="videos/regression_vid.mp4" data-background-video-loop data-background-video-muted>
+<p><a href="https://yihui.name/en/">via Yihui Xie</a></p>
 </section>
+
+
+
+
 
 ## 
 
 <section data-background-video="videos/class1.mp4" data-background-video-loop data-background-video-muted>
+<p><a href="https://yihui.name/en/">via Yihui Xie</a></p>
 </section>
 
 ## Classification example
