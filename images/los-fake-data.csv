@@ -1,0 +1,11 @@
+"unit","length_of_stay","number_of_patients","High","ifelse(length_of_stay < 0, 1, length_of_stay)"
+"GIM",8,107,"normal",8
+"General Surgery",3,101,"normal",3
+"Orthopaedics",12,36,"high",12
+"Psychiatry",21,157,"high",21
+"Cardiology",5,136,"normal",5
+"Urology",5,92,"normal",5
+"Neurosurgery",12,133,"high",12
+"Nephrology",15,38,"high",15
+"Newborn",9,118,"high",9
+"Respirology",21,109,"high",21

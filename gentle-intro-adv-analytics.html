@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>gentle-intro-adv-analytics.utf8.md</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="gentle-intro-adv-analytics_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="gentle-intro-adv-analytics_files/reveal.js-3.3.0.1/css/theme/simple.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script src="gentle-intro-adv-analytics_files/htmlwidgets-1.2.1/htmlwidgets.js"></script>
+    <script src="gentle-intro-adv-analytics_files/jquery-1.12.4/jquery.min.js"></script>
+    <link href="gentle-intro-adv-analytics_files/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="gentle-intro-adv-analytics_files/datatables-binding-0.4.18/datatables.js"></script>
+    <link href="gentle-intro-adv-analytics_files/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="gentle-intro-adv-analytics_files/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="gentle-intro-adv-analytics_files/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+    <link href="gentle-intro-adv-analytics_files/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+    <script src="gentle-intro-adv-analytics_files/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level2">
+
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+<style type="text/css">
+html.dim-background .slide-background {
+    opacity: 0.15 !important;
+}
+
+
+</style>
+</section>
+<section id="section" class="slide level2" data-background="images/background-img.png" data-background-size="70%">
+<h2></h2>
+</section>
+<section id="overview" class="slide level2">
+<h2>Overview</h2>
+<ul>
+<li>The Analytics Continuum</li>
+<li>High level overview of Different analytical tools
+<ul>
+<li>From Descriptive to Prescriptive analysis</li>
+</ul></li>
+<li>Workflow for Advanced Analytics
+<ul>
+<li>CRISP DM</li>
+</ul></li>
+<li>What tools do we use</li>
+</ul>
+<section>
+<iframe src="https://giphy.com/embed/3oKIPEqDGUULpEU0aQ" width="680" height="360" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+</section>
+</section>
+<section id="lets-dig-in" class="slide level2" data-background="images/nnet.png" data-background-transition="zoom">
+<h2>Let’s dig in</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">class</span> NeuralNetwork:</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x, y):</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">        <span class="va">self</span>.<span class="bu">input</span>      <span class="op">=</span> x</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">        <span class="va">self</span>.weights1   <span class="op">=</span> np.random.rand(<span class="va">self</span>.<span class="bu">input</span>.shape[<span class="dv">1</span>],<span class="dv">4</span>) </a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">        <span class="va">self</span>.weights2   <span class="op">=</span> np.random.rand(<span class="dv">4</span>,<span class="dv">1</span>)                 </a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">        <span class="va">self</span>.y          <span class="op">=</span> y</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">        <span class="va">self</span>.output     <span class="op">=</span> np.zeros(<span class="va">self</span>.y.shape)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="kw">def</span> feedforward(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">        <span class="va">self</span>.layer1 <span class="op">=</span> sigmoid(np.dot(<span class="va">self</span>.<span class="bu">input</span>, <span class="va">self</span>.weights1))</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">        <span class="va">self</span>.output <span class="op">=</span> sigmoid(np.dot(<span class="va">self</span>.layer1, <span class="va">self</span>.weights2))</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">    <span class="kw">def</span> backprop(<span class="va">self</span>):</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">        <span class="co"># application of the chain rule to find derivative of the loss function with respect to weights2 and weights1</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">        d_weights2 <span class="op">=</span> np.dot(<span class="va">self</span>.layer1.T, (<span class="dv">2</span><span class="op">*</span>(<span class="va">self</span>.y <span class="op">-</span> <span class="va">self</span>.output) <span class="op">*</span> sigmoid_derivative(<span class="va">self</span>.output)))</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">        d_weights1 <span class="op">=</span> np.dot(<span class="va">self</span>.<span class="bu">input</span>.T,  (np.dot(<span class="dv">2</span><span class="op">*</span>(<span class="va">self</span>.y <span class="op">-</span> <span class="va">self</span>.output) <span class="op">*</span> sigmoid_derivative(<span class="va">self</span>.output), <span class="va">self</span>.weights2.T) <span class="op">*</span> sigmoid_derivative(<span class="va">self</span>.layer1)))</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">        <span class="co"># update the weights with the derivative (slope) of the loss function</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">        <span class="va">self</span>.weights1 <span class="op">+=</span> d_weights1</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">        <span class="va">self</span>.weights2 <span class="op">+=</span> d_weights2</a></code></pre></div>
+</section>
+<section id="section-1" class="slide level2" data-background="images/gartner1.png" data-background-transition="zoom">
+<h2></h2>
+</section>
+<section id="section-2" class="slide level2" data-background="images/gartner2.png" data-background-transition="none">
+<h2></h2>
+</section>
+<section id="section-3" class="slide level2" data-background="images/gartner3.png" data-background-transition="none">
+<h2></h2>
+</section>
+<section id="section-4" class="slide level2" data-background="images/gartner.png" data-background-transition="none">
+<h2></h2>
+</section>
+<section id="section-5" class="slide level2" data-background="images/gartner4.png" data-background-transition="none">
+<h2></h2>
+</section>
+<section id="section-6" class="slide level2" data-background="images/gartner5.png" data-background-transition="none">
+<h2></h2>
+</section>
+<section id="section-7" class="slide level2" data-background="images/gartner6.png" data-background-transition="none">
+<h2></h2>
+</section>
+<section id="section-8" class="slide level2" data-background="images/gartner7.png" data-background-transition="none">
+<h2></h2>
+</section>
+<section id="section-9" class="slide level2" data-background="images/gartner8.png" data-background-transition="none">
+<h2></h2>
+</section>
+<section id="the-ideal-data-scientist" class="slide level2">
+<h2>The ideal data scientist</h2>
+<section>
+<iframe src="https://giphy.com/embed/l0HlMr2G3EKFgpUY0" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/l0HlMr2G3EKFgpUY0"></a>
+</p>
+</section>
+</section>
+<section id="section-10" class="slide level2" data-background="images/mixture1.png" data-background-transition="concave" data-background-size="50%">
+<h2></h2>
+</section>
+<section id="section-11" class="slide level2" data-background="images/team.png" data-background-transition="concave" data-background-size="75%">
+<h2></h2>
+</section>
+<section id="section-12" class="slide level2" data-background="images/michaelia.png" data-background-transition="concave" data-background-size="45%">
+<h2></h2>
+</section>
+<section id="brief-tour-of-the-analytics-continuum" class="slide level2" data-background="images/gartner8.png" data-background-transition="zoom" data-state="dim-background">
+<h2>Brief tour of the analytics continuum</h2>
+</section>
+<section id="data-and-questions-historical-paradigm" class="slide level2" data-background="images/data-question.png" data-background-transition="slide" data-background-size="70%">
+<h2>Data and Questions (Historical Paradigm)</h2>
+</section>
+<section id="data-and-questions-age-of-cheap-data" class="slide level2" data-background="images/data-question2.png" data-background-transition="slide" data-background-size="70%">
+<h2>Data and Questions (Age of Cheap Data)</h2>
+</section>
+<section id="what-are-descriptive-analyses" class="slide level2">
+<h2>What Are Descriptive Analyses?</h2>
+<ul>
+<li>Descriptive analyses are the summarization of historical data.</li>
+</ul>
+<p><img src="gentle-intro-adv-analytics_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" /></p>
+</section>
+<section id="why-are-descriptive-analyses-useful" class="slide level2" data-background="images/gartner1.png" data-background-transition="zoom" data-state="dim-background">
+<h2>Why are descriptive analyses useful?</h2>
+<p>They help us:</p>
+<section>
+<ol>
+<li class="fragment fade-up">
+Understand our data
+</li>
+<li class="fragment fade-up">
+Identify outliers and potential data issues
+</li>
+<li class="fragment fade-up">
+Identify baseline models (for prediction problems)
+</li>
+<li class="fragment fade-up">
+Answer historical data questions
+</li>
+<ul>
+<li class="fragment fade-up">
+What’s the average LOS in the ED
+</li>
+<li class="fragment fade-up">
+On average, how many patients get transferred to the ICU per year
+</li>
+<li class="fragment fade-up">
+Have our Inpatient length of stays been increasing?
+</li>
+<li class="fragment fade-up">
+Which Physicians have the highest variance in outcomes?
+</li>
+</ul>
+</ol>
+</section>
+</section>
+<section id="descriptive-analyses" class="slide level2" data-background="images/gartner1.png" data-background-transition="zoom" data-state="dim-background">
+<h2>Descriptive Analyses</h2>
+<ul>
+<li>Summarizing data through:
+<ul>
+<li>Counts and proportions</li>
+<li>Means and Standard Deviations</li>
+<li>Distributional properties like quantiles, skewness, etc…</li>
+<li>Data issues:
+<ul>
+<li>Number of missing values</li>
+<li>Data input errors (e.g. Patient Weight &lt; 0)</li>
+<li>Number of misspelled words in text variables</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="diagnostic-analytics" class="slide level2" data-background="images/gartner2.png" data-background-transition="zoom" data-state="dim-background">
+<h2>Diagnostic Analytics</h2>
+<ul>
+<li>Diagnostic analyses help us answer the question: “Why did it happen?”</li>
+</ul>
+<section>
+<iframe src="https://giphy.com/embed/3o6MbdgtxoHhDSlBsc" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/thesimpsons-3o6MbdgtxoHhDSlBsc"></a>
+</p>
+</section>
+</section>
+<section id="examples-of-diagnostic-analytics" class="slide level2" data-background="images/gartner2.png" data-background-transition="zoom" data-state="dim-background">
+<h2>Examples of Diagnostic Analytics?</h2>
+<ul>
+<li>Did our intervention in some clinic increase patient satisfaction</li>
+</ul>
+<p><img data-src="images/intervention.png" /></p>
+</section>
+<section id="examples-of-diagnostic-analytics-1" class="slide level2" data-background="images/gartner2.png" data-background-transition="none" data-state="dim-background">
+<h2>Examples of Diagnostic Analytics?</h2>
+<ul>
+<li>Which inpatient units are driving length of stay?</li>
+</ul>
+<p><img src="gentle-intro-adv-analytics_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" /></p>
+</section>
+<section id="why-are-diagnostic-analyses-useful" class="slide level2" data-background="images/gartner2.png" data-background-transition="zoom" data-state="dim-background">
+<h2>Why are diagnostic analyses useful?</h2>
+<p>They help us:</p>
+<ul>
+<li>Understand relationships in our data</li>
+<li>Directly test hypotheses</li>
+<li>Answer historical data questions:
+<ul>
+<li>Why do certain patient groups have longer LOS</li>
+<li>Do ED volumes increase the day after a holiday</li>
+<li>Why can’t I predict X accurately?</li>
+</ul></li>
+</ul>
+</section>
+<section id="forms-of-diagnostic-analyses" class="slide level2" data-background="images/gartner1.png" data-background-transition="slide" data-state="dim-background">
+<h2>Forms of Diagnostic Analyses</h2>
+<ul>
+<li>Understanding relationships in the data through:
+<ul>
+<li>Cross-tabulating data</li>
+<li>Correlation analysis</li>
+<li>Drilling down within aggregates or within an individual row of data</li>
+<li>Traditional Statistical Hypothesis testing (T-test, ANOVA, chi-square test, etc…)</li>
+<li>Regression modeling</li>
+</ul></li>
+</ul>
+</section>
+<section id="predictive-analytics" class="slide level2" data-background="images/gartner3.png" data-background-transition="slide" data-state="dim-background">
+<h2>Predictive Analytics</h2>
+</section>
+<section id="section-13" class="slide level2">
+<h2></h2>
+<section>
+<iframe src="https://giphy.com/embed/t8IKNElbi8PyU" width="480" height="422" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/animation-cartoons-math-t8IKNElbi8PyU"></a>
+</p>
+</section>
+</section>
+<section id="aimldeep-learning" class="slide level2" data-background="images/ai_vs_ml.png" data-background-transition="zoom" data-background-size="35%">
+<h2>AI/ML/Deep Learning</h2>
+</section>
+<section id="section-14" class="slide level2">
+<h2></h2>
+<ul>
+<li><p>Artificial Intelligence: Designing computer systems to perform tasks which are usually performed by humans</p></li>
+<li><p>Machine Learning: The study of algorithms that a computer can use to improve its performance on some task:</p></li>
+<li><p>Deep Learning: A machine learning algorithm inspired by the structure and function of the brain.</p></li>
+</ul>
+</section>
+<section id="section-15" class="slide level2" data-background="images/ifelse.jpg" data-background-transition="slide" data-background-size="40%">
+<h2></h2>
+</section>
+<section id="machine-learning" class="slide level2">
+<h2>Machine Learning</h2>
+<p>Machine learning is the study of algorithms that a computer can use to improve its performance on some task:</p>
+<ul>
+<li><font size="6">Identify which patients will need a transfer to the ICU in the next 24 hours</font></li>
+<li><font size="6">Predict the number of inpatient admissions for the next 7 days</font></li>
+<li><font size="6">What is the likelihood that a patient will not show up for an appointment</font></li>
+<li><font size="6">Determine which radiology reports contain a bone with a fracture</font></li>
+<li><font size="6">Determine a patient’s diagnosis from admission/nursing notes</font></li>
+<li><font size="6">Determine different treatment patterns among patients with the same disease/diagnosis</font></li>
+<li><font size="6">Identify patient subgroups that have high hospital utilization</font></li>
+</ul>
+</section>
+<section id="machine-learning-supervised-learning" class="slide level2">
+<h2>Machine Learning (Supervised Learning)</h2>
+<ul>
+<li><strong>Surpervised learning</strong>: The computer is provided with both the input data and the output data and design an algorithm to match the two as closely as possible. There are two types:
+<ul>
+<li><font color="red" size="6">Regression</font>: The output is a continuous variable. e.g. cost, length of stay, number of comorbidities etc…</li>
+<li><font color="blue" size="6">Classification</font>: The output is a categorical label e.g. icu transfer yes/no, readmission yes/no, patient diagnosis ICD10 codes</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-16" class="slide level2">
+<h2></h2>
+<section>
+<img src="images/reg_class.png" height="480" width="700">
+</section>
+</section>
+<section id="machine-learning-unsupervised-learning" class="slide level2">
+<h2>Machine Learning (Unsupervised Learning)</h2>
+<ul>
+<li><font color="green"> <strong>Unsupervised Learning</strong></font>: The computer is provided with only input data (no labels) and attempts to find structure in the data. Often used to discover clusters in the data.</li>
+</ul>
+<p><img data-src="images/unsup.png" /></p>
+</section>
+<section id="section-17" class="slide level2">
+<h2></h2>
+<p><font size="6" color="blue">Classification</font>,<font size="6" color="red">Regression</font>, <font size="6" color="green">Unsupervized</font></p>
+<ul>
+<li><font size="6" color="blue">Identify which patients will need a transfer to the ICU in the next 24 hours</font></li>
+<li><font size="6" color="red">Predict the number of inpatient admissions for the next 7 days</font></li>
+<li><font size="6" color="blue">What is the likelyhood that a patient will not show up for an appointment</font></li>
+<li><font size="6" color="blue">Determine which radiology reports contain a bone with a fracture</font></li>
+<li><font size="6" color="blue">Determine a patient’s diagnosis from admission/nursing notes</font></li>
+<li><font size="6" color="green">Determine different treatment patterns among patients with the same disease/diagnosis</font></li>
+<li><font size="6" color="green">Identify patient subgroups that have high hospital utilization</font></li>
+</ul>
+</section>
+<section id="machine-learning-process-supervised-learning" class="slide level2">
+<h2>Machine Learning Process (supervised learning)</h2>
+<ul>
+<li>Given some input data <em>X</em> and an outcome y</li>
+<li>Find a function f(X) that maps the values of X -&gt; y</li>
+<li>Such that it minimizes some error e</li>
+</ul>
+</section>
+<section id="inputs-to-outputs" class="slide level2">
+<h2>Inputs to Outputs</h2>
+<p>Examples of inputs and outputs into machine learning algorithms</p>
+<ul>
+<li>Inputs: Patient age, gender, admit diagnosis.
+<ul>
+<li>Outputs: Length of stay</li>
+</ul></li>
+<li>Inputs: The number of patients in the emergency department for each day in the last 365 days.
+<ul>
+<li>Outputs: Emergency department volume tomorrow</li>
+</ul></li>
+<li>Inputs: Patient admission note.
+<ul>
+<li>Outputs: ICD10 code of admit diagnosis</li>
+</ul></li>
+<li>Inputs: Radiology image of a bone.
+<ul>
+<li>Outputs: yes/no is there a fracture in the image</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-18" class="slide level2">
+<h2></h2>
+<section data-background-video="videos/regression_vid.mp4" data-background-video-loop data-background-video-muted>
+</section>
+</section>
+<section id="section-19" class="slide level2">
+<h2></h2>
+<section data-background-video="videos/class1.mp4" data-background-video-loop data-background-video-muted>
+</section>
+</section>
+<section id="classification-example" class="slide level2">
+<h2>Classification example</h2>
+<section>
+<img src="images/overfit1.PNG" height="480" width="800">
+</section>
+</section>
+<section id="overfitting" class="slide level2">
+<h2>Overfitting</h2>
+<section>
+<img src="images/overfit2.PNG" height="480" width="800">
+</section>
+</section>
+<section id="machine-learning-performance" class="slide level2">
+<h2>Machine learning performance</h2>
+<ul>
+<li>Given our input and data (X, y), we split the data into:
+<ul>
+<li>(X_train, y_train), and (X_test, y_test)</li>
+</ul></li>
+<li>Our Machine learning problem is to find a model that is trained using:
+<ul>
+<li>(X_train, y_train) but generalizes to (X_test, y_test)</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-20" class="slide level2">
+<h2></h2>
+<section data-background-video="videos/cross_validation.mp4" data-background-video-loop data-background-video-muted>
+</section>
+</section>
+<section id="common-regression-models" class="slide level2">
+<h2>Common Regression Models</h2>
+<ul>
+<li>Linear Regression
+<ul>
+<li>Generalized Linear Models</li>
+</ul></li>
+<li>Generalized Additive Models (non-linear regression)</li>
+<li>Support Vector Machines</li>
+<li>Decision Trees</li>
+<li>Random Forests</li>
+<li>Gradiant Boosting Machines</li>
+</ul>
+</section>
+<section id="common-classifiers" class="slide level2">
+<h2>Common Classifiers</h2>
+<ul>
+<li>Logistic Regression
+<ul>
+<li>Generalized Linear Models</li>
+</ul></li>
+<li>Naive Bayes</li>
+<li>Support Vector Machines</li>
+<li>Decision Trees</li>
+<li>Random Forests</li>
+<li>Gradiant Boosting Machines</li>
+</ul>
+</section>
+<section id="hyperparameters" class="slide level2">
+<h2>Hyperparameters</h2>
+<div id="htmlwidget-720117308909bf42545c" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-720117308909bf42545c">{"x":{"filter":"none","caption":"<caption>List of models with their hyperparameters<\/caption>","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237"],["AdaBoost Classification Trees","AdaBoost.M1","Adaptive Mixture Discriminant Analysis","Adaptive-Network-Based Fuzzy Inference System","Adjacent Categories Probability Model for Ordinal Data","Bagged AdaBoost","Bagged CART","Bagged FDA using gCV Pruning","Bagged Flexible Discriminant Analysis","Bagged Logic Regression","Bagged MARS","Bagged MARS using gCV Pruning","Bagged Model","Bayesian Additive Regression Trees","Bayesian Generalized Linear Model","Bayesian Regularized Neural Networks","Bayesian Ridge Regression","Bayesian Ridge Regression (Model Averaged)","Binary Discriminant Analysis","Boosted Classification Trees","Boosted Generalized Additive Model","Boosted Generalized Linear Model","Boosted Linear Model","Boosted Logistic Regression","Boosted Smoothing Spline","Boosted Tree","Boosted Tree","C4.5-like Trees","C5.0","CART","CART","CART","CART or Ordinal Responses","CHi-squared Automated Interaction Detection","Conditional Inference Random Forest","Conditional Inference Tree","Conditional Inference Tree","Continuation Ratio Model for Ordinal Data","Cost-Sensitive C5.0","Cost-Sensitive CART","Cubist","Cumulative Probability Model for Ordinal Data","DeepBoost","Diagonal Discriminant Analysis","Distance Weighted Discrimination with Polynomial Kernel","Distance Weighted Discrimination with Radial Basis Function Kernel","Dynamic Evolving Neural-Fuzzy Inference System","Elasticnet","Ensembles of Generalized Linear Models","eXtreme Gradient Boosting","eXtreme Gradient Boosting","eXtreme Gradient Boosting","Extreme Learning Machine","Factor-Based Linear Discriminant Analysis","Flexible Discriminant Analysis","Fuzzy Inference Rules by Descent Method","Fuzzy Rules Using Chi's Method","Fuzzy Rules Using Genetic Cooperative-Competitive Learning and Pittsburgh","Fuzzy Rules Using the Structural Learning Algorithm on Vague Environment","Fuzzy Rules via MOGUL","Fuzzy Rules via Thrift","Fuzzy Rules with Weight Factor","Gaussian Process","Gaussian Process with Polynomial Kernel","Gaussian Process with Radial Basis Function Kernel","Generalized Additive Model using LOESS","Generalized Additive Model using Splines","Generalized Additive Model using Splines","Generalized Additive Model using Splines","Generalized Linear Model","Generalized Linear Model with Stepwise Feature Selection","Generalized Partial Least Squares","Genetic Lateral Tuning and Rule Selection of Linguistic Fuzzy Systems","glmnet","glmnet","Gradient Boosting Machines","Greedy Prototype Selection","Heteroscedastic Discriminant Analysis","High Dimensional Discriminant Analysis","High-Dimensional Regularized Discriminant Analysis","Hybrid Neural Fuzzy Inference System","Independent Component Regression","k-Nearest Neighbors","k-Nearest Neighbors","L2 Regularized Linear Support Vector Machines with Class Weights","L2 Regularized Support Vector Machine (dual) with Linear Kernel","Learning Vector Quantization","Least Angle Regression","Least Angle Regression","Least Squares Support Vector Machine","Least Squares Support Vector Machine with Polynomial Kernel","Least Squares Support Vector Machine with Radial Basis Function Kernel","Linear Discriminant Analysis","Linear Discriminant Analysis","Linear Discriminant Analysis with Stepwise Feature Selection","Linear Distance Weighted Discrimination","Linear Regression","Linear Regression with Backwards Selection","Linear Regression with Forward Selection","Linear Regression with Stepwise Selection","Linear Regression with Stepwise Selection","Linear Support Vector Machines with Class Weights","Localized Linear Discriminant Analysis","Logic Regression","Logistic Model Trees","Maximum Uncertainty Linear Discriminant Analysis","Mixture Discriminant Analysis","Model Averaged Naive Bayes Classifier","Model Averaged Neural Network","Model Rules","Model Tree","Monotone Multi-Layer Perceptron Neural Network","Multi-Layer Perceptron","Multi-Layer Perceptron","Multi-Layer Perceptron, multiple layers","Multi-Layer Perceptron, with multiple layers","Multi-Step Adaptive MCP-Net","Multilayer Perceptron Network by Stochastic Gradient Descent","Multilayer Perceptron Network with Dropout","Multilayer Perceptron Network with Dropout","Multilayer Perceptron Network with Weight Decay","Multilayer Perceptron Network with Weight Decay","Multivariate Adaptive Regression Spline","Multivariate Adaptive Regression Splines","Naive Bayes","Naive Bayes","Naive Bayes Classifier","Naive Bayes Classifier with Attribute Weighting","Nearest Shrunken Centroids","Negative Binomial Generalized Linear Model","Neural Network","Neural Network","Neural Network","Neural Network","Neural Networks with Feature Extraction","Non-Convex Penalized Quantile Regression","Non-Informative Model","Non-Negative Least Squares","Oblique Random Forest","Oblique Random Forest","Oblique Random Forest","Oblique Random Forest","Optimal Weighted Nearest Neighbor Classifier","Ordered Logistic or Probit Regression","Parallel Random Forest","partDSA","Partial Least Squares","Partial Least Squares","Partial Least Squares","Partial Least Squares","Partial Least Squares Generalized Linear Models","Patient Rule Induction Method","Penalized Discriminant Analysis","Penalized Discriminant Analysis","Penalized Linear Discriminant Analysis","Penalized Linear Regression","Penalized Logistic Regression","Penalized Multinomial Regression","Penalized Ordinal Regression","Polynomial Kernel Regularized Least Squares","Principal Component Analysis","Projection Pursuit Regression","Quadratic Discriminant Analysis","Quadratic Discriminant Analysis with Stepwise Feature Selection","Quantile Random Forest","Quantile Regression Neural Network","Quantile Regression with LASSO penalty","Radial Basis Function Kernel Regularized Least Squares","Radial Basis Function Network","Radial Basis Function Network","Random Ferns","Random Forest","Random Forest","Random Forest","Random Forest by Randomization","Random Forest Rule-Based Model","Regularized Discriminant Analysis","Regularized Linear Discriminant Analysis","Regularized Logistic Regression","Regularized Random Forest","Regularized Random Forest","Relaxed Lasso","Relevance Vector Machines with Linear Kernel","Relevance Vector Machines with Polynomial Kernel","Relevance Vector Machines with Radial Basis Function Kernel","Ridge Regression","Ridge Regression with Variable Selection","Robust Linear Discriminant Analysis","Robust Linear Model","Robust Mixture Discriminant Analysis","Robust Quadratic Discriminant Analysis","Robust Regularized Linear Discriminant Analysis","Robust SIMCA","ROC-Based Classifier","Rotation Forest","Rotation Forest","Rule-Based Classifier","Rule-Based Classifier","Self-Organizing Maps","Semi-Naive Structure Learner Wrapper","Shrinkage Discriminant Analysis","SIMCA","Simplified TSK Fuzzy Rules","Single C5.0 Ruleset","Single C5.0 Tree","Single Rule Classification","Sparse Distance Weighted Discrimination","Sparse Linear Discriminant Analysis","Sparse Mixture Discriminant Analysis","Sparse Partial Least Squares","Spike and Slab Regression","Stabilized Linear Discriminant Analysis","Stabilized Nearest Neighbor Classifier","Stacked AutoEncoder Deep Neural Network","Stochastic Gradient Boosting","Subtractive Clustering and Fuzzy c-Means Rules","Supervised Principal Component Analysis","Support Vector Machines with Boundrange String Kernel","Support Vector Machines with Class Weights","Support Vector Machines with Exponential String Kernel","Support Vector Machines with Linear Kernel","Support Vector Machines with Linear Kernel","Support Vector Machines with Polynomial Kernel","Support Vector Machines with Radial Basis Function Kernel","Support Vector Machines with Radial Basis Function Kernel","Support Vector Machines with Radial Basis Function Kernel","Support Vector Machines with Spectrum String Kernel","The Bayesian lasso","The lasso","Tree Augmented Naive Bayes Classifier","Tree Augmented Naive Bayes Classifier Structure Learner Wrapper","Tree Augmented Naive Bayes Classifier with Attribute Weighting","Tree Models from Genetic Algorithms","Tree-Based Ensembles","Variational Bayesian Multinomial Probit Regression","Wang and Mendel Fuzzy Rules","Weighted Subspace Random Forest"],["Classification","Classification","Classification","Regression","Classification","Classification","Classification, Regression","Classification","Classification","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Regression","Regression","Regression","Classification","Classification","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Classification","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Classification","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Classification","Classification","Regression","Classification","Classification","Classification","Classification","Classification","Regression","Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Classification","Regression","Classification","Classification","Classification","Regression","Regression","Classification","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Classification","Classification","Classification","Regression","Regression","Classification, Regression","Classification, Regression","Classification","Classification, Regression","Classification","Regression","Regression","Classification","Classification","Classification","Classification","Classification","Classification","Classification","Regression","Regression","Regression","Regression","Regression","Classification","Classification","Classification, Regression","Classification","Classification","Classification","Classification","Classification, Regression","Regression","Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Classification, Regression","Classification","Classification, Regression","Classification, Regression","Classification","Classification","Classification","Classification","Classification","Regression","Classification, Regression","Classification, Regression","Regression","Classification, Regression","Classification, Regression","Regression","Classification, Regression","Regression","Classification","Classification","Classification","Classification","Classification","Classification","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Classification","Classification","Classification","Regression","Classification","Classification","Classification","Regression","Regression","Regression","Classification","Classification","Regression","Regression","Regression","Regression","Classification, Regression","Classification, Regression","Classification","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification","Classification","Classification","Classification, Regression","Classification, Regression","Regression","Regression","Regression","Regression","Regression","Regression","Classification","Regression","Classification","Classification","Classification","Classification","Classification","Classification","Classification","Classification","Classification","Classification, Regression","Classification","Classification","Classification","Regression","Classification","Classification","Classification","Classification","Classification","Classification","Classification, Regression","Regression","Classification","Classification","Classification, Regression","Classification, Regression","Regression","Regression","Classification, Regression","Classification","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Classification, Regression","Regression","Regression","Classification","Classification","Classification","Classification, Regression","Classification, Regression","Classification","Regression","Classification"],["nIter, method","mfinal, maxdepth, coeflearn","model","num.labels, max.iter","parallel, link","mfinal, maxdepth","None","degree","degree, nprune","nleaves, ntrees","nprune, degree","degree","vars","num_trees, k, alpha, beta, nu","None","neurons","None","None","lambda.freqs","iter, maxdepth, nu","mstop, prune","mstop, prune","mstop, nu","nIter","mstop, nu","mstop, maxdepth","mstop, maxdepth, nu","C, M","trials, model, winnow","cp","None","maxdepth","cp, split, prune","alpha2, alpha3, alpha4","mtry","mincriterion","maxdepth, mincriterion","parallel, link","trials, model, winnow, cost","cp, Cost","committees, neighbors","parallel, link","num_iter, tree_depth, beta, lambda, loss_type","model, shrinkage","lambda, qval, degree, scale","lambda, qval, sigma","Dthr, max.iter","fraction, lambda","maxInteractionOrder","nrounds, max_depth, eta, gamma, subsample, colsample_bytree, rate_drop, skip_drop, min_child_weight","nrounds, lambda, alpha, eta","nrounds, max_depth, eta, gamma, colsample_bytree, min_child_weight, subsample","nhid, actfun","q","degree, nprune","num.labels, max.iter","num.labels, type.mf","max.num.rule, popu.size, max.gen","num.labels, max.iter, max.gen","max.gen, max.iter, max.tune","popu.size, num.labels, max.gen","num.labels, type.mf","None","degree, scale","sigma","span, degree","select, method","select, method","df","None","None","K.prov","popu.size, num.labels, max.gen","alpha, lambda","alpha, lambda","ntrees, max_depth, min_rows, learn_rate, col_sample_rate","eps, Minkowski","gamma, lambda, newdim","threshold, model","gamma, lambda, shrinkage_type","num.labels, max.iter","n.comp","kmax, distance, kernel","k","cost, Loss, weight","cost, Loss","size, k","fraction","step","tau","degree, scale, tau","sigma, tau","None","dimen","maxvar, direction","lambda, qval","intercept","nvmax","nvmax","nvmax","None","cost, weight","k","treesize, ntrees","iter","None","subclasses","smooth, prior","size, decay, bag","pruned, smoothed","pruned, smoothed, rules","hidden1, n.ensemble","size","size, decay","layer1, layer2, layer3, decay","layer1, layer2, layer3","alphas, nsteps, scale","size, l2reg, lambda, learn_rate, momentum, gamma, minibatchsz, repeats","size, dropout, batch_size, lr, rho, decay, activation","size, dropout, batch_size, lr, rho, decay, cost, activation","size, lambda, batch_size, lr, rho, decay, activation","size, lambda, batch_size, lr, rho, decay, cost, activation","nprune, degree","degree","laplace, usekernel, adjust","fL, usekernel, adjust","smooth","smooth","threshold","link","layer1, layer2, layer3, learning.rate, momentum, dropout, activation","layer1, layer2, layer3, dropout, beta1, beta2, learningrate, activation","layer1, layer2, layer3","size, decay","size, decay","lambda, penalty","None","None","mtry","mtry","mtry","mtry","K","method","mtry","cut.off.growth, MPD","ncomp","ncomp","ncomp","ncomp","nt, alpha.pvals.expli","peel.alpha, paste.alpha, mass.min","lambda","df","lambda, K","lambda1, lambda2","lambda, cp","decay","alpha, criteria, link","lambda, degree","ncomp","nterms","None","maxvar, direction","mtry","n.hidden, penalty, bag","lambda","lambda, sigma","size","negativeThreshold","depth","mtry, splitrule, min.node.size","predFixed, minNode","mtry","mtry, numRandomCuts","mtry, maxdepth","gamma, lambda","estimator","cost, loss, epsilon","mtry, coefReg, coefImp","mtry, coefReg","lambda, phi","None","scale, degree","sigma","lambda","k, lambda","None","intercept, psi","K, model","None","lambda, hp, penalty","None","xgenes","K, L","K, L, cp","NumOpt, NumFolds, MinWeights","threshold, pruned","xdim, ydim, user.weights, topo","k, epsilon, smooth, final_smooth, direction","diagonal, lambda","None","num.labels, max.iter","None","None","None","lambda, lambda2","NumVars, lambda","NumVars, lambda, R","K, eta, kappa","vars","None","lambda","layer1, layer2, layer3, hidden_dropout, visible_dropout","n.trees, interaction.depth, shrinkage, n.minobsinnode","r.a, eps.high, eps.low","threshold, n.components","length, C","sigma, C, Weight","lambda, C","C","cost","degree, scale, C","sigma, C","C","sigma, C","length, C","sparsity","fraction","score, smooth","k, epsilon, smooth, final_smooth, sp","score, smooth","alpha","maxinter, mode","estimateTheta","num.labels, type.mf","mtry"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>model<\/th>\n      <th>type<\/th>\n      <th>tuning parameter<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+</section>
+<section id="section-21" class="slide level2">
+<h2></h2>
+<p>Outline of steps to creating a machine learning model</p>
+<ul>
+<li>Data Exploration</li>
+<li>Train, Test, Validation data split</li>
+<li><strong>Feature Engineering</strong></li>
+<li>Model Selection</li>
+<li>Hyperparameter Tuning</li>
+<li>Model Evaluation</li>
+</ul>
+</section>
+<section id="feature-engineering" class="slide level2">
+<h2>Feature Engineering</h2>
+<section>
+<img src="images/var1.PNG" height="400" width="400">
+</section>
+</section>
+<section id="hand-crafted-features" class="slide level2">
+<h2>Hand Crafted Features</h2>
+<section>
+<img src="images/var2.PNG" height="400" width="400">
+</section>
+</section>
+<section id="feature-engineering-text" class="slide level2">
+<h2>Feature Engineering Text</h2>
+<section>
+<blockquote>
+“ Ms. Johnson is a 70 year old woman presenting with CHF. Her daughter and husband brought her in to the emergency room shortly after midnight last night. Ms. Johnson uses a cane to walk. She was recently diagnosed with alzheimer’s disease which required hospitalization recently. She is currently on the following medications…. ”
+</blockquote>
+</section>
+</section>
+<section id="one-hot-encode-words" class="slide level2">
+<h2>One hot encode words</h2>
+<section>
+<img src="images/text1.PNG" height="400" width="400">
+</section>
+</section>
+<section id="extracting-topics" class="slide level2">
+<h2>Extracting topics</h2>
+<section>
+<img src="images/topic.PNG" height="500" width="800">
+</section>
+</section>
+<section id="predicting-age-with-topics" class="slide level2">
+<h2>Predicting age with topics</h2>
+<section>
+<img src="images/age_pred.PNG" height="500" width="800">
+</section>
+</section>
+<section id="neural-networks" class="slide level2">
+<h2>Neural Networks</h2>
+<p>Artificial Neural Networks are a set of frameworks inspired by the brain. They are primarily used for:</p>
+<ul>
+<li><font size="4">Regression tasks</font></li>
+<li><font size="4">Classification tasks</font></li>
+<li><font size="4">Unsupervised tasks (finding data representations)</font></li>
+</ul>
+<section>
+<img src="images/nn_img.jpg" height="300" width="400">
+</section>
+</section>
+<section id="why-deep-learning" class="slide level2">
+<h2>Why Deep Learning?</h2>
+<section>
+<img src="images/why_dl.PNG" height="480" width="700">
+</section>
+</section>
+<section id="why-deep-learning-1" class="slide level2">
+<h2>Why Deep Learning</h2>
+<ul>
+<li>Unsure of relationships between variables</li>
+<li>Lots of data</li>
+<li>Certain there are lots of non-linear relationships in the data</li>
+<li>They outperform a lot of older models on image/video tasks</li>
+</ul>
+</section>
+<section id="deep-neural-networks" class="slide level2">
+<h2>Deep Neural Networks</h2>
+<p>A neural network with more than one layer</p>
+<ul>
+<li>Feed Forward Networks
+<ul>
+<li>Regression and Forecasting</li>
+<li>Classification, including images</li>
+</ul></li>
+<li>Convolutional Neural Networks (CNN or ConvNet)
+<ul>
+<li>Classifying images and video</li>
+<li>Natural Language processing</li>
+<li>Drug discovery</li>
+</ul></li>
+<li>Recurrent Neural Networks (RNNs)
+<ul>
+<li>Time series forecasting</li>
+<li>Prediction in medical care pathways</li>
+<li>Anomoly detection</li>
+<li>machine translation</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-22" class="slide level2">
+<h2></h2>
+<section data-background-video="videos/deep_learning.webm" data-background-video-loop data-background-video-muted>
+</section>
+</section>
+<section id="prescriptive-models" class="slide level2">
+<h2>Prescriptive models</h2>
+<p>Models used to make decisions</p>
+<ul>
+<li><strong>Simulation modeling</strong>
+<ul>
+<li>Build a mathematical model of the world and simulate that word under different scenatios (10k’s times)</li>
+<li>e.g. What would adding an extra CT scanner do to wait times in the ED</li>
+</ul></li>
+<li><strong>optimization models</strong>
+<ul>
+<li>Build a mathematical model of the world</li>
+<li>Relate model parameters to some outcome, and generate some optimal solution</li>
+<li>e.g. How many nurses on a nursing resource team?</li>
+</ul></li>
+<li><strong>Reinforcement Learning</strong>
+<ul>
+<li>How an agent should make decisions to optimize some reward</li>
+<li>e.g. What care pathway to use?</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-nrt" class="slide level2">
+<h2>Example NRT</h2>
+<section>
+<img src="images/nrt1.PNG" height="600" width="800">
+</section>
+</section>
+<section id="example-nrt-gui" class="slide level2">
+<h2>Example NRT GUI</h2>
+<section>
+<img src="images/nrt2.PNG" height="600" width="800">
+</section>
+</section>
+<section id="no-free-lunch" class="slide level2">
+<h2>No Free Lunch</h2>
+<ul>
+<li>No model is optimal for all problems</li>
+</ul>
+<section>
+<iframe src="https://giphy.com/embed/st83jeYy9L6Bq" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/things-capital-learnings-st83jeYy9L6Bq"></a>
+</p>
+</section>
+</section>
+<section id="workflow" class="slide level2">
+<h2>Workflow</h2>
+<ul>
+<li>Cross Industry Standard for Process for Data Mining (CRISP DM)</li>
+</ul>
+<p><img src="images/cripdm.PNG" alt="CRISP DM" height="480" width="560" class="center"></p>
+</section>
+<section id="stage-1.-business-objectives" class="slide level2">
+<h2>Stage 1. Business Objectives</h2>
+<ul>
+<li>Set primary business objective
+<ul>
+<li>e.g. Reduce number of patients dying unexpectedly in hospital</li>
+<li>e.g. Reduce the number of patients readmitted within 90 days</li>
+</ul></li>
+<li>Project plan
+<ul>
+<li>Stages to be executed in the project + duration, resources required, inputs, outputs and dependencies</li>
+</ul></li>
+<li>Initial assessment of tools and techniques
+<ul>
+<li>At the end of your first phase you should undertake an initial assessment of tools and techniques</li>
+</ul></li>
+</ul>
+</section>
+<section id="stage-2.-data-collection" class="slide level2">
+<h2>Stage 2. Data Collection</h2>
+<ul>
+<li>Initial data collection report
+<ul>
+<li>List the data sources acquired together with their locations, methods used to acquire them and any problems encountered (record problems and resolutions)</li>
+</ul></li>
+<li>Explore Data:
+<ul>
+<li>Distribution of key variables</li>
+<li>Relationships between pairs or small numbers of attributes</li>
+<li>Simple statistical analyses</li>
+</ul></li>
+<li>Verify data quality
+<ul>
+<li>Outliers</li>
+<li>Data input errors</li>
+</ul></li>
+</ul>
+</section>
+<section id="stage-3.-data-preparation" class="slide level2">
+<h2>Stage 3. Data Preparation</h2>
+<ul>
+<li><p>Select Data</p></li>
+<li>Clean Data
+<ul>
+<li>Impute missing values</li>
+</ul></li>
+<li>Construct Required Data
+<ul>
+<li>transform variables</li>
+<li>Create new variables</li>
+</ul></li>
+<li>Integrate Data
+<ul>
+<li>Merge data sources</li>
+</ul></li>
+</ul>
+</section>
+<section id="stage-4.-modeling" class="slide level2">
+<h2>Stage 4. Modeling</h2>
+<ul>
+<li>Select Modeling Technique
+<ul>
+<li>Document modeling assumptions</li>
+</ul></li>
+<li>Set model Evaluation strategy</li>
+</ul>
+<section>
+<iframe src="https://giphy.com/embed/l46CimW38a7TFxLVe" width="380" height="380" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/tacocatband-tacocat-l46CimW38a7TFxLVe"></a>
+</p>
+</section>
+</section>
+<section id="model-evaluation" class="slide level2">
+<h2>Model Evaluation</h2>
+<ul>
+<li>Model Accuracy may not be the best way to evaluate a model</li>
+</ul>
+<section>
+<iframe src="https://giphy.com/embed/qiDb8McXyj6Eg" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/russell-sequel-qiDb8McXyj6Eg"></a>
+</p>
+</section>
+</section>
+<section id="evaluation-classification" class="slide level2">
+<h2>Evaluation (Classification)</h2>
+<ul>
+<li><strong>Accuracy</strong>: the proportion of the total number of predictions that were correct.</li>
+<li><strong>Positive Predictive Value</strong>: the proportion of positive cases that were correctly identified.</li>
+<li><strong>Negative Predictive Value</strong>: the proportion of negative cases that were correctly identified.</li>
+<li><strong>Sensitivity or Recall</strong>: the proportion of actual positive cases which are correctly identified.</li>
+<li><strong>Specificity</strong>: the proportion of actual negative cases which are correctly identified.</li>
+</ul>
+</section>
+<section id="evaluation-metrics" class="slide level2">
+<h2>Evaluation Metrics</h2>
+<section>
+<img src="images/tp.PNG" height="280" width="700">
+</section>
+</section>
+<section id="section-23" class="slide level2">
+<h2></h2>
+<ul>
+<li>Accuracy = (TP + TN)/(TP + TN + FP + FN)</li>
+<li>PPV = (TP)/(TP + FP)</li>
+<li>NPV = (TN)/(TN + FN)</li>
+<li>Sensitvity = (TP)/(TP + FN)</li>
+<li>Specificity = (TN)/(TN + FP)</li>
+</ul>
+</section>
+<section id="evaluation-metrics-regression" class="slide level2">
+<h2>Evaluation Metrics (Regression)</h2>
+<ul>
+<li>Root Mean Squared Error (RMSE)</li>
+<li>R squared</li>
+<li>Adjusted R squared</li>
+<li>Mean Absolute Percent Error (MAPE)</li>
+<li>Mean Absolue Error (MAE)</li>
+</ul>
+</section>
+<section id="stage-5.-evaluation" class="slide level2">
+<h2>Stage 5. Evaluation</h2>
+<ul>
+<li>Assess the degree to which the model meets your business objectives, or test the model on test applications</li>
+<li><p>Approve the model(s) that meet business success criteria</p></li>
+<li><p>Review the process and set next steps</p></li>
+</ul>
+</section>
+<section id="stage-6.-deployment" class="slide level2">
+<h2>Stage 6. Deployment</h2>
+<ul>
+<li>Plan Deployment
+<ul>
+<li>Summarize your deployment strategy including the necessary steps and how to perform them.</li>
+</ul></li>
+<li>Plan Monitoring and Maintenance</li>
+</ul>
+<section>
+<iframe src="https://giphy.com/embed/zhJR6HbK4fthC" width="380" height="660" frameBorder="0" class="giphy-embed" allowFullScreen>
+</iframe>
+<p>
+<a href="https://giphy.com/gifs/the-matrix-zhJR6HbK4fthC"></a>
+</p>
+</section>
+</section>
+<section id="example" class="slide level2">
+<h2>Example:</h2>
+<ul>
+<li>Predict if a GIM patient will be transfered to the ICU using first 24 hours of data</li>
+<li>Collect Data:
+<ul>
+<li>Timestamps for patient outcomes</li>
+<li>Vital Signs</li>
+<li>Lab Results (~ 500)</li>
+<li>Clinical Orders (~1000s)</li>
+<li>Medication Orders (~1000s)</li>
+<li><strong>Admission Notes</strong></li>
+<li><strong>Nurse Notes</strong></li>
+<li><strong>Radiology reports</strong></li>
+</ul></li>
+</ul>
+</section>
+<section id="example-models" class="slide level2">
+<h2>Example Models</h2>
+<section>
+<img src="images/static_models.png" height="480" width="700">
+</section>
+</section>
+<section id="tools" class="slide level2">
+<h2>Tools</h2>
+<ul>
+<li>Data Prep/Analysis
+<ul>
+<li>SQL, R, Python, SAS, SPSS, Stata</li>
+</ul></li>
+<li>Data Visualization
+<ul>
+<li>ggplot, D3, matplotlib, javascript, html</li>
+</ul></li>
+<li>Deep Learning
+<ul>
+<li>Tensorflow, Keras, Pytorch, CNTK</li>
+</ul></li>
+</ul>
+<section>
+<img src="images/comp.PNG" height="200" width="700">
+</section>
+</section>
+<section id="references" class="slide level2">
+<h2>References</h2>
+<section>
+<img src="images/sl2.png" height="480" width="700">
+</section>
+</section>
+<section id="questions" class="slide level2">
+<h2>Questions</h2>
+</section>
+    </div>
+  </div>
+
+  <script src="gentle-intro-adv-analytics_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="gentle-intro-adv-analytics_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Transition style
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'gentle-intro-adv-analytics_files/reveal.js-3.3.0.1/plugin/notes/notes.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

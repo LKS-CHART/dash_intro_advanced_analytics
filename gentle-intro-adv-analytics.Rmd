@@ -1,0 +1,735 @@
+---
+title: 
+output: 
+  revealjs::revealjs_presentation:
+    highlight: tango
+    self_contained: false
+    reveal_plugins: ["notes"]
+---
+
+
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+
+```{css, echo=F}
+html.dim-background .slide-background {
+    opacity: 0.15 !important;
+}
+
+
+```
+
+## {data-background="images/background-img.png" data-background-size="70%"}
+
+## Overview
+
+- The Analytics Continuum
+- High level overview of Different analytical tools
+  - From Descriptive to Prescriptive analysis
+- Workflow for Advanced Analytics
+  - CRISP DM
+- What tools do we use
+
+<section>
+<iframe src="https://giphy.com/embed/3oKIPEqDGUULpEU0aQ" width="680" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+</section>
+
+## Let's dig in  {data-background="images/nnet.png" data-background-transition="zoom"}
+
+```{python, eval=F}
+class NeuralNetwork:
+    def __init__(self, x, y):
+        self.input      = x
+        self.weights1   = np.random.rand(self.input.shape[1],4) 
+        self.weights2   = np.random.rand(4,1)                 
+        self.y          = y
+        self.output     = np.zeros(self.y.shape)
+
+    def feedforward(self):
+        self.layer1 = sigmoid(np.dot(self.input, self.weights1))
+        self.output = sigmoid(np.dot(self.layer1, self.weights2))
+
+    def backprop(self):
+        # application of the chain rule to find derivative of the loss function with respect to weights2 and weights1
+        d_weights2 = np.dot(self.layer1.T, (2*(self.y - self.output) * sigmoid_derivative(self.output)))
+        d_weights1 = np.dot(self.input.T,  (np.dot(2*(self.y - self.output) * sigmoid_derivative(self.output), self.weights2.T) * sigmoid_derivative(self.layer1)))
+
+        # update the weights with the derivative (slope) of the loss function
+        self.weights1 += d_weights1
+        self.weights2 += d_weights2
+
+```
+
+
+
+##  {data-background="images/gartner1.png" data-background-transition="zoom"}
+
+##  {data-background="images/gartner2.png" data-background-transition="none"}
+
+##  {data-background="images/gartner3.png" data-background-transition="none"}
+
+##  {data-background="images/gartner.png" data-background-transition="none"}
+
+## {data-background="images/gartner4.png" data-background-transition="none"}
+
+## {data-background="images/gartner5.png" data-background-transition="none"}
+
+## {data-background="images/gartner6.png" data-background-transition="none"}
+
+## {data-background="images/gartner7.png" data-background-transition="none"}
+
+## {data-background="images/gartner8.png" data-background-transition="none"}
+
+## The ideal data scientist
+
+<section>
+<iframe src="https://giphy.com/embed/l0HlMr2G3EKFgpUY0" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/l0HlMr2G3EKFgpUY0"></a></p>
+</section>
+
+## {data-background="images/mixture1.png" data-background-transition="concave" data-background-size="50%"}
+
+## {data-background="images/team.png" data-background-transition="concave" data-background-size="75%"}
+
+## {data-background="images/michaelia.png" data-background-transition="concave" data-background-size="45%"}
+
+
+## Brief tour of the analytics continuum {data-background="images/gartner8.png" data-background-transition="zoom" data-state="dim-background"}
+
+## Data and Questions (Historical Paradigm) {data-background="images/data-question.png" data-background-transition="slide" data-background-size="70%"}
+
+## Data and Questions (Age of Cheap Data) {data-background="images/data-question2.png" data-background-transition="slide" data-background-size="70%"}
+
+## What Are Descriptive Analyses?
+
+- Descriptive analyses are the summarization of historical data.
+
+
+
+```{r, echo=F, warning=F, message=F, fig.height= 4.5}
+library(tidyverse)
+library(lubridate)
+library(cowplot)
+library(CHART)
+ed <- readr::read_csv('images/historical-ed-1month.csv')
+ed_hour <- ed %>% 
+  count(day = day(PRESENTING_TS), hour = hour(PRESENTING_TS)) %>% 
+  group_by(hour) %>% 
+  summarize(mean_vol = mean(n),
+            sd_vol = sd(n))
+p1 <- ggplot(ed_hour, aes(hour, mean_vol)) +
+  geom_line() + 
+  geom_errorbar(aes(ymin = mean_vol - sd_vol, ymax = mean_vol + sd_vol)) +
+  ggtitle("ED volumes per hour: Average \u00B1 SD", subtitle =  "July 2017") +
+  coord_cartesian(ylim = c(0,25)) +
+  xlab("Hour of day") +
+  ylab("Mean Volume") +
+  theme_chart() + theme(plot.title = element_text(size=8))
+
+ed_day <- ed %>% 
+  count(REFERENCE_CALENDAR_DT)
+
+ed_day <- ed_day %>% 
+  mutate(wday = wday(REFERENCE_CALENDAR_DT, label = T))
+
+p2 <- ggplot(ed_day, aes(REFERENCE_CALENDAR_DT, n)) +
+  geom_line() + 
+  ggtitle("Total Emergency Volumes per day", subtitle = "July 2017") +
+  xlab("Time") + ylab("Volume") +
+  theme_chart()
+
+  
+p3 <- ggplot(ed_day, aes(wday, n)) +
+  geom_boxplot() + 
+  ggtitle("Distribution of ED volumes by day of week", subtitle = "July 2017") +
+  theme_chart()+ theme(plot.title = element_text(size=8))
+
+g1 <- plot_grid(p1, p3, ncol = 2) 
+
+plot_grid(g1, p2, nrow = 2)
+
+
+```
+
+## Why are descriptive analyses useful? {data-background="images/gartner1.png" data-background-transition="zoom" data-state="dim-background"}
+
+They help us:
+
+<section>
+  <ol>
+	  <li class="fragment fade-up">Understand our data </li>
+	  <li class="fragment fade-up">Identify outliers and potential data issues</li>
+  	<li class="fragment fade-up">Identify baseline models (for prediction problems)</li>
+  	<li class="fragment fade-up">Answer historical data questions</li>
+  	  <ul>
+  	    <li class="fragment fade-up">What's the average LOS in the ED</li>
+  	    <li class="fragment fade-up">On average, how many patients get transferred to the ICU per year</li>
+  	    <li class="fragment fade-up">Have our Inpatient length of stays been increasing?</li>
+  	    <li class="fragment fade-up">Which Physicians have the highest variance in outcomes? </li>
+  	  </ul>
+	</ol>
+</section>
+
+## Descriptive Analyses {data-background="images/gartner1.png" data-background-transition="zoom" data-state="dim-background"}
+
+- Summarizing data through:
+  - Counts and proportions
+  - Means and Standard Deviations
+  - Distributional properties like quantiles, skewness, etc...
+  - Data issues:
+    - Number of missing values
+    - Data input errors (e.g. Patient Weight < 0)
+    - Number of misspelled words in text variables
+
+## Diagnostic Analytics {data-background="images/gartner2.png" data-background-transition="zoom" data-state="dim-background"}
+
+- Diagnostic analyses help us answer the question: "Why did it happen?"
+
+<section>
+ <iframe src="https://giphy.com/embed/3o6MbdgtxoHhDSlBsc" width="480" height="366" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/thesimpsons-3o6MbdgtxoHhDSlBsc"></a></p>
+</section>
+
+
+## Examples of Diagnostic Analytics? {data-background="images/gartner2.png" data-background-transition="zoom" data-state="dim-background"}
+
+
+- Did our intervention in some clinic increase patient satisfaction
+
+![](images/intervention.png)
+
+
+## Examples of Diagnostic Analytics? {data-background="images/gartner2.png" data-background-transition="none" data-state="dim-background"}
+
+
+- Which inpatient units are driving length of stay?
+
+```{r, echo=F, warning=F, message=F, fig.height= 4.5}
+library(treemap)
+
+df <- readr::read_csv('images/los-fake-data.csv')
+
+treemap(df,index = c("unit"), vSize = "number_of_patients", vColor = "length_of_stay", type = "value", 
+        title = "Length of Stay by Inpatient Unit", palette = CHART::smh_palettes$cool)
+
+```
+
+
+## Why are diagnostic analyses useful? {data-background="images/gartner2.png" data-background-transition="zoom" data-state="dim-background"}
+
+They help us:
+
+- Understand relationships in our data
+- Directly test hypotheses
+- Answer historical data questions:
+  - Why do certain patient groups have longer LOS
+  - Do ED volumes increase the day after a holiday
+  - Why can't I predict X accurately?
+
+
+
+## Forms of Diagnostic Analyses {data-background="images/gartner1.png" data-background-transition="slide" data-state="dim-background"}
+
+- Understanding relationships in the data through:
+  - Cross-tabulating data
+  - Correlation analysis
+  - Drilling down within aggregates or within an individual row of data
+  - Traditional Statistical Hypothesis testing (T-test, ANOVA, chi-square test, etc...)
+  - Regression modeling
+
+
+## Predictive Analytics {data-background="images/gartner3.png" data-background-transition="slide" data-state="dim-background"}
+
+
+## 
+
+<section>
+<iframe src="https://giphy.com/embed/t8IKNElbi8PyU" width="480" height="422" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/animation-cartoons-math-t8IKNElbi8PyU"></a></p>
+</section>
+
+
+## AI/ML/Deep Learning {data-background="images/ai_vs_ml.png" data-background-transition="zoom" data-background-size="35%"}
+
+## 
+
+- Artificial Intelligence: Designing computer systems to perform tasks which are usually
+performed by humans
+
+- Machine Learning: The study of algorithms that a computer can use to improve its performance on some task:
+
+- Deep Learning: A machine learning algorithm inspired by the structure and function of the brain.
+
+
+##   {data-background="images/ifelse.jpg" data-background-transition="slide"  data-background-size="40%"}
+
+
+
+
+## Machine Learning
+
+Machine learning is the study of algorithms that a computer can use to improve its performance on some task:
+
+- <font size="6">Identify which patients will need a transfer to the ICU in the next 24 hours</font>
+- <font size="6">Predict the number of inpatient admissions for the next 7 days</font>
+- <font size="6">What is the likelihood that a patient will not show up for an appointment</font>
+- <font size="6">Determine which radiology reports contain a bone with a fracture</font>
+- <font size="6">Determine a patient's diagnosis from admission/nursing notes</font>
+- <font size="6">Determine different treatment patterns among patients with the same disease/diagnosis</font>
+- <font size="6">Identify patient subgroups that have high hospital utilization</font> 
+
+
+## Machine Learning (Supervised Learning)
+
+
+- **Surpervised learning**: The computer is provided with both the input data and the output data and design an
+algorithm to match the two as closely as possible. There are two types:
+  - <font color="red" size="6">Regression</font>: The output is a continuous variable. e.g. cost, length of stay, number of comorbidities etc...
+  - <font color="blue" size="6">Classification</font>: The output is a categorical label e.g. icu transfer yes/no, readmission yes/no, patient diagnosis ICD10 codes
+
+
+
+##
+
+<section>
+<img src="images/reg_class.png" height="480" width="700">
+</section>
+
+
+
+## Machine Learning (Unsupervised Learning)
+
+- <font color="green"> **Unsupervised Learning**</font>: The computer is provided with only input data (no labels) and attempts to find structure in the data. Often used to discover clusters in the data. 
+
+
+
+![](images/unsup.png)
+
+##
+<font size="6" color="blue">Classification</font>,<font size="6" color="red">Regression</font>, <font size="6" color="green">Unsupervized</font>
+
+- <font size="6" color="blue">Identify which patients will need a transfer to the ICU in the next 24 hours</font>
+- <font size="6" color="red">Predict the number of inpatient admissions for the next 7 days</font>
+- <font size="6" color="blue">What is the likelyhood that a patient will not show up for an appointment</font>
+- <font size="6" color="blue">Determine which radiology reports contain a bone with a fracture</font>
+- <font size="6" color="blue">Determine a patient's diagnosis from admission/nursing notes</font>
+- <font size="6" color="green">Determine different treatment patterns among patients with the same disease/diagnosis</font>
+- <font size="6" color="green">Identify patient subgroups that have high hospital utilization</font> 
+
+
+## Machine Learning Process (supervised learning)
+
+- Given some input data *X* and an outcome y
+- Find a function f(X) that maps the values of X -> y
+- Such that it minimizes some error e
+
+## Inputs to Outputs
+
+Examples of inputs and outputs into machine learning algorithms
+
+- Inputs: Patient age, gender, admit diagnosis. 
+  - Outputs: Length of stay
+- Inputs: The number of patients in the emergency department for each day in the last 365 days. 
+  - Outputs: Emergency department volume tomorrow
+- Inputs: Patient admission note. 
+  - Outputs: ICD10 code of admit diagnosis
+- Inputs: Radiology image of a bone. 
+  - Outputs: yes/no is there a fracture in the image
+
+
+
+
+## 
+
+<section data-background-video="videos/regression_vid.mp4" data-background-video-loop data-background-video-muted>
+</section>
+
+## 
+
+<section data-background-video="videos/class1.mp4" data-background-video-loop data-background-video-muted>
+</section>
+
+## Classification example
+
+<section>
+<img src="images/overfit1.png" height="480" width="800">
+</section>
+
+## Overfitting 
+
+<section>
+<img src="images/overfit2.png" height="480" width="800">
+</section>
+
+## Machine learning performance
+
+- Given our input and data (X, y), we split the data into:
+  - (X_train, y_train), and (X_test, y_test)
+- Our Machine learning problem is to find a model that is trained using:
+  - (X_train, y_train) but generalizes to (X_test, y_test)
+
+## 
+
+<section data-background-video="videos/cross_validation.mp4" data-background-video-loop data-background-video-muted>
+</section>
+
+
+
+## Common Regression Models
+
+- Linear Regression
+  - Generalized Linear Models
+- Generalized Additive Models (non-linear regression)
+- Support Vector Machines
+- Decision Trees
+- Random Forests
+- Gradiant Boosting Machines
+
+
+
+
+
+## Common Classifiers
+
+
+- Logistic Regression
+  - Generalized Linear Models
+- Naive Bayes
+- Support Vector Machines
+- Decision Trees
+- Random Forests
+- Gradiant Boosting Machines
+
+## Hyperparameters
+
+```{r, echo=F, warning=F, message=F}
+library(readr)
+
+df <- read_csv("images/model_list.csv")
+
+DT::datatable(df, caption = "List of models with their hyperparameters")
+```
+
+## 
+
+Outline of steps to creating a machine learning model
+
+- Data Exploration
+- Train, Test, Validation data split
+- **Feature Engineering**
+- Model Selection
+- Hyperparameter Tuning
+- Model Evaluation
+
+## Feature Engineering
+
+
+<section>
+<img src="images/var1.png" height="400" width="400">
+</section>
+
+## Hand Crafted Features
+
+<section>
+<img src="images/var2.png" height="400" width="400">
+</section>
+
+
+## Feature Engineering Text
+
+<section>
+    <blockquote>
+				  &ldquo; Ms. Johnson is a 70 year old woman presenting with CHF. Her daughter and husband brought her
+				  in to the emergency room shortly after midnight last night. Ms. Johnson uses a cane to walk.
+				  She was recently diagnosed with alzheimer's disease 
+					which required hospitalization recently. She is currently on the following medications.... &rdquo;
+		</blockquote>
+</section>
+
+## One hot encode words
+
+<section>
+<img src="images/text1.png" height="400" width="400">
+</section>
+
+
+## Extracting topics
+
+<section>
+<img src="images/topic.png" height="500" width="800">
+</section>
+
+## Predicting age with topics
+
+<section>
+<img src="images/age_pred.png" height="500" width="800">
+</section>
+
+
+
+## Neural Networks
+
+Artificial Neural Networks are a set of frameworks inspired by the brain. They are primarily used for:
+
+- <font size="4">Regression tasks</font>
+- <font size="4">Classification tasks</font>
+- <font size="4">Unsupervised tasks (finding data representations)</font>
+
+
+<section>
+<img src="images/nn_img.jpg" height="300" width="400">
+</section>
+
+## Why Deep Learning?
+
+<section>
+<img src="images/why_dl.png" height="480" width="700">
+</section>
+
+## Why Deep Learning
+
+- Unsure of relationships between variables
+- Lots of data
+- Certain there are lots of non-linear relationships in the data
+- They outperform a lot of older models on image/video tasks
+
+
+## Deep Neural Networks
+
+A neural network with more than one layer
+
+- Feed Forward Networks
+  - Regression and Forecasting
+  - Classification, including images
+- Convolutional Neural Networks (CNN or ConvNet)
+  - Classifying images and video
+  - Natural Language processing 
+  - Drug discovery
+- Recurrent Neural Networks (RNNs)
+  - Time series forecasting
+  - Prediction in medical care pathways
+  - Anomoly detection
+  - machine translation
+
+
+##
+
+<section data-background-video="videos/deep_learning.webm" data-background-video-loop data-background-video-muted>
+</section>
+
+
+## Prescriptive models
+
+Models used to make decisions
+
+- **Simulation modeling**
+  - Build a mathematical model of the world and simulate that word under different scenatios (10k's times)
+  - e.g. What would adding an extra CT scanner do to wait times in the ED
+- **optimization models**
+  - Build a mathematical model of the world
+  - Relate model parameters to some outcome, and generate some optimal solution
+  - e.g. How many nurses on a nursing resource team?
+- **Reinforcement Learning**
+  - How an agent should make decisions to optimize some reward
+  - e.g. What care pathway to use?
+
+## Example NRT
+
+<section>
+<img src="images/nrt1.png" height="600" width="800">
+</section>
+
+
+## Example NRT GUI
+
+<section>
+<img src="images/nrt2.png" height="600" width="800">
+</section>
+
+## No Free Lunch
+
+- No model is optimal for all problems
+
+<section>
+<iframe src="https://giphy.com/embed/st83jeYy9L6Bq" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/things-capital-learnings-st83jeYy9L6Bq"></a></p>
+</section>
+
+
+## Workflow 
+
+- Cross Industry Standard for Process for Data Mining (CRISP DM)
+
+<img src="images/cripdm.png" alt="CRISP DM" height="480" width="560" class="center">
+
+
+## Stage 1. Business Objectives
+
+
+- Set primary business objective
+  - e.g. Reduce number of patients dying unexpectedly in hospital
+  - e.g. Reduce the number of patients readmitted within 90 days
+
+- Project plan
+    - Stages to be executed in the project + duration, resources required, inputs, outputs and dependencies 
+
+- Initial assessment of tools and techniques
+    - At the end of your first phase you should undertake an initial assessment of tools and techniques 
+
+## Stage 2. Data Collection
+
+- Initial data collection report
+  -  List the data sources acquired together with their locations, methods used to acquire them and any problems encountered (record problems and resolutions)
+  
+- Explore Data:
+    - Distribution of key variables 
+    - Relationships between pairs or small numbers of attributes
+    - Simple statistical analyses
+
+- Verify data quality
+  - Outliers
+  - Data input errors
+  
+
+## Stage 3. Data Preparation
+
+- Select Data
+
+- Clean Data
+  - Impute missing values
+
+- Construct Required Data
+  - transform variables
+  - Create new variables
+
+- Integrate Data
+  - Merge data sources
+    
+
+## Stage 4. Modeling
+
+- Select Modeling Technique
+  - Document modeling assumptions
+
+- Set model Evaluation strategy
+
+<section>
+<iframe src="https://giphy.com/embed/l46CimW38a7TFxLVe" width="380" height="380" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/tacocatband-tacocat-l46CimW38a7TFxLVe"></a></p>
+</section>
+
+## Model Evaluation
+
+- Model Accuracy may not be the best way to evaluate a model
+
+<section>
+<iframe src="https://giphy.com/embed/qiDb8McXyj6Eg" width="480" height="360" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/russell-sequel-qiDb8McXyj6Eg"></a></p>
+</section>
+
+## Evaluation  (Classification)
+
+- **Accuracy**: the proportion of the total number of predictions that were correct.
+- **Positive Predictive Value**: the proportion of positive cases that were correctly identified.
+- **Negative Predictive Value**: the proportion of negative cases that were correctly identified.
+- **Sensitivity or Recall**: the proportion of actual positive cases which are correctly identified.
+- **Specificity**: the proportion of actual negative cases which are correctly identified.
+
+## Evaluation Metrics
+
+<section>
+<img src="images/tp.png" height="280" width="700">
+</section> 
+
+##
+
+- Accuracy = (TP + TN)/(TP + TN + FP + FN)
+- PPV = (TP)/(TP + FP)
+- NPV = (TN)/(TN + FN)
+- Sensitvity = (TP)/(TP + FN)
+- Specificity = (TN)/(TN + FP)
+
+## Evaluation Metrics (Regression)
+
+- Root Mean Squared Error (RMSE)
+- R squared
+- Adjusted R squared
+- Mean Absolute Percent Error (MAPE)
+- Mean Absolue Error (MAE)
+
+
+
+## Stage 5. Evaluation
+
+- Assess the degree to which the model meets your business objectives, or test the model on test applications
+- Approve the model(s) that meet business success criteria
+
+- Review the process and set next steps
+
+## Stage 6. Deployment
+
+- Plan Deployment
+    - Summarize your deployment strategy including the necessary steps and how to perform them.
+- Plan Monitoring and Maintenance
+
+<section>
+<iframe src="https://giphy.com/embed/zhJR6HbK4fthC" width="380" height="660" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/the-matrix-zhJR6HbK4fthC"></a></p>
+</section>
+
+## Example:
+
+- Predict if a GIM patient will be transfered to the ICU using first 24 hours of data
+- Collect Data:
+  - Timestamps for patient outcomes
+  - Vital Signs
+  - Lab Results (~ 500)
+  - Clinical Orders (~1000s)
+  - Medication Orders (~1000s)
+  - **Admission Notes**
+  - **Nurse Notes**
+  - **Radiology reports**
+
+## Example Models  
+
+
+ <section>
+<img src="images/static_models.png" height="480" width="700">
+</section> 
+
+
+## Tools
+
+- Data Prep/Analysis
+  - SQL, R, Python, SAS, SPSS, Stata
+- Data Visualization
+  - ggplot, D3, matplotlib, javascript, html
+- Deep Learning
+  - Tensorflow, Keras, Pytorch, CNTK
+
+
+
+<section>
+<img src="images/comp.png" height="200" width="700">
+</section>
+
+
+## References
+
+<section>
+<img src="images/sl2.png" height="480" width="700">
+</section>
+
+
+## Questions
+
+
+
+
+
+
+
+

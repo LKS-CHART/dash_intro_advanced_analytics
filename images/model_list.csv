@@ -1,0 +1,238 @@
+model,type,tuning parameter
+AdaBoost Classification Trees,Classification,"nIter, method"
+AdaBoost.M1,Classification,"mfinal, maxdepth, coeflearn"
+Adaptive Mixture Discriminant Analysis,Classification,model
+Adaptive-Network-Based Fuzzy Inference System,Regression,"num.labels, max.iter"
+Adjacent Categories Probability Model for Ordinal Data,Classification,"parallel, link"
+Bagged AdaBoost,Classification,"mfinal, maxdepth"
+Bagged CART,"Classification, Regression",None
+Bagged FDA using gCV Pruning,Classification,degree
+Bagged Flexible Discriminant Analysis,Classification,"degree, nprune"
+Bagged Logic Regression,"Classification, Regression","nleaves, ntrees"
+Bagged MARS,"Classification, Regression","nprune, degree"
+Bagged MARS using gCV Pruning,"Classification, Regression",degree
+Bagged Model,"Classification, Regression",vars
+Bayesian Additive Regression Trees,"Classification, Regression","num_trees, k, alpha, beta, nu"
+Bayesian Generalized Linear Model,"Classification, Regression",None
+Bayesian Regularized Neural Networks,Regression,neurons
+Bayesian Ridge Regression,Regression,None
+Bayesian Ridge Regression (Model Averaged),Regression,None
+Binary Discriminant Analysis,Classification,lambda.freqs
+Boosted Classification Trees,Classification,"iter, maxdepth, nu"
+Boosted Generalized Additive Model,"Classification, Regression","mstop, prune"
+Boosted Generalized Linear Model,"Classification, Regression","mstop, prune"
+Boosted Linear Model,"Classification, Regression","mstop, nu"
+Boosted Logistic Regression,Classification,nIter
+Boosted Smoothing Spline,"Classification, Regression","mstop, nu"
+Boosted Tree,"Classification, Regression","mstop, maxdepth"
+Boosted Tree,"Classification, Regression","mstop, maxdepth, nu"
+C4.5-like Trees,Classification,"C, M"
+C5.0,Classification,"trials, model, winnow"
+CART,"Classification, Regression",cp
+CART,"Classification, Regression",None
+CART,"Classification, Regression",maxdepth
+CART or Ordinal Responses,Classification,"cp, split, prune"
+CHi-squared Automated Interaction Detection,Classification,"alpha2, alpha3, alpha4"
+Conditional Inference Random Forest,"Classification, Regression",mtry
+Conditional Inference Tree,"Classification, Regression",mincriterion
+Conditional Inference Tree,"Classification, Regression","maxdepth, mincriterion"
+Continuation Ratio Model for Ordinal Data,Classification,"parallel, link"
+Cost-Sensitive C5.0,Classification,"trials, model, winnow, cost"
+Cost-Sensitive CART,Classification,"cp, Cost"
+Cubist,Regression,"committees, neighbors"
+Cumulative Probability Model for Ordinal Data,Classification,"parallel, link"
+DeepBoost,Classification,"num_iter, tree_depth, beta, lambda, loss_type"
+Diagonal Discriminant Analysis,Classification,"model, shrinkage"
+Distance Weighted Discrimination with Polynomial Kernel,Classification,"lambda, qval, degree, scale"
+Distance Weighted Discrimination with Radial Basis Function Kernel,Classification,"lambda, qval, sigma"
+Dynamic Evolving Neural-Fuzzy Inference System,Regression,"Dthr, max.iter"
+Elasticnet,Regression,"fraction, lambda"
+Ensembles of Generalized Linear Models,"Classification, Regression",maxInteractionOrder
+eXtreme Gradient Boosting,"Classification, Regression","nrounds, max_depth, eta, gamma, subsample, colsample_bytree, rate_drop, skip_drop, min_child_weight"
+eXtreme Gradient Boosting,"Classification, Regression","nrounds, lambda, alpha, eta"
+eXtreme Gradient Boosting,"Classification, Regression","nrounds, max_depth, eta, gamma, colsample_bytree, min_child_weight, subsample"
+Extreme Learning Machine,"Classification, Regression","nhid, actfun"
+Factor-Based Linear Discriminant Analysis,Classification,q
+Flexible Discriminant Analysis,Classification,"degree, nprune"
+Fuzzy Inference Rules by Descent Method,Regression,"num.labels, max.iter"
+Fuzzy Rules Using Chi's Method,Classification,"num.labels, type.mf"
+Fuzzy Rules Using Genetic Cooperative-Competitive Learning and Pittsburgh,Classification,"max.num.rule, popu.size, max.gen"
+Fuzzy Rules Using the Structural Learning Algorithm on Vague Environment,Classification,"num.labels, max.iter, max.gen"
+Fuzzy Rules via MOGUL,Regression,"max.gen, max.iter, max.tune"
+Fuzzy Rules via Thrift,Regression,"popu.size, num.labels, max.gen"
+Fuzzy Rules with Weight Factor,Classification,"num.labels, type.mf"
+Gaussian Process,"Classification, Regression",None
+Gaussian Process with Polynomial Kernel,"Classification, Regression","degree, scale"
+Gaussian Process with Radial Basis Function Kernel,"Classification, Regression",sigma
+Generalized Additive Model using LOESS,"Classification, Regression","span, degree"
+Generalized Additive Model using Splines,"Classification, Regression","select, method"
+Generalized Additive Model using Splines,"Classification, Regression","select, method"
+Generalized Additive Model using Splines,"Classification, Regression",df
+Generalized Linear Model,"Classification, Regression",None
+Generalized Linear Model with Stepwise Feature Selection,"Classification, Regression",None
+Generalized Partial Least Squares,Classification,K.prov
+Genetic Lateral Tuning and Rule Selection of Linguistic Fuzzy Systems,Regression,"popu.size, num.labels, max.gen"
+glmnet,"Classification, Regression","alpha, lambda"
+glmnet,"Classification, Regression","alpha, lambda"
+Gradient Boosting Machines,"Classification, Regression","ntrees, max_depth, min_rows, learn_rate, col_sample_rate"
+Greedy Prototype Selection,Classification,"eps, Minkowski"
+Heteroscedastic Discriminant Analysis,Classification,"gamma, lambda, newdim"
+High Dimensional Discriminant Analysis,Classification,"threshold, model"
+High-Dimensional Regularized Discriminant Analysis,Classification,"gamma, lambda, shrinkage_type"
+Hybrid Neural Fuzzy Inference System,Regression,"num.labels, max.iter"
+Independent Component Regression,Regression,n.comp
+k-Nearest Neighbors,"Classification, Regression","kmax, distance, kernel"
+k-Nearest Neighbors,"Classification, Regression",k
+L2 Regularized Linear Support Vector Machines with Class Weights,Classification,"cost, Loss, weight"
+L2 Regularized Support Vector Machine (dual) with Linear Kernel,"Classification, Regression","cost, Loss"
+Learning Vector Quantization,Classification,"size, k"
+Least Angle Regression,Regression,fraction
+Least Angle Regression,Regression,step
+Least Squares Support Vector Machine,Classification,tau
+Least Squares Support Vector Machine with Polynomial Kernel,Classification,"degree, scale, tau"
+Least Squares Support Vector Machine with Radial Basis Function Kernel,Classification,"sigma, tau"
+Linear Discriminant Analysis,Classification,None
+Linear Discriminant Analysis,Classification,dimen
+Linear Discriminant Analysis with Stepwise Feature Selection,Classification,"maxvar, direction"
+Linear Distance Weighted Discrimination,Classification,"lambda, qval"
+Linear Regression,Regression,intercept
+Linear Regression with Backwards Selection,Regression,nvmax
+Linear Regression with Forward Selection,Regression,nvmax
+Linear Regression with Stepwise Selection,Regression,nvmax
+Linear Regression with Stepwise Selection,Regression,None
+Linear Support Vector Machines with Class Weights,Classification,"cost, weight"
+Localized Linear Discriminant Analysis,Classification,k
+Logic Regression,"Classification, Regression","treesize, ntrees"
+Logistic Model Trees,Classification,iter
+Maximum Uncertainty Linear Discriminant Analysis,Classification,None
+Mixture Discriminant Analysis,Classification,subclasses
+Model Averaged Naive Bayes Classifier,Classification,"smooth, prior"
+Model Averaged Neural Network,"Classification, Regression","size, decay, bag"
+Model Rules,Regression,"pruned, smoothed"
+Model Tree,Regression,"pruned, smoothed, rules"
+Monotone Multi-Layer Perceptron Neural Network,"Classification, Regression","hidden1, n.ensemble"
+Multi-Layer Perceptron,"Classification, Regression",size
+Multi-Layer Perceptron,"Classification, Regression","size, decay"
+"Multi-Layer Perceptron, multiple layers","Classification, Regression","layer1, layer2, layer3, decay"
+"Multi-Layer Perceptron, with multiple layers","Classification, Regression","layer1, layer2, layer3"
+Multi-Step Adaptive MCP-Net,"Classification, Regression","alphas, nsteps, scale"
+Multilayer Perceptron Network by Stochastic Gradient Descent,"Classification, Regression","size, l2reg, lambda, learn_rate, momentum, gamma, minibatchsz, repeats"
+Multilayer Perceptron Network with Dropout,"Classification, Regression","size, dropout, batch_size, lr, rho, decay, activation"
+Multilayer Perceptron Network with Dropout,Classification,"size, dropout, batch_size, lr, rho, decay, cost, activation"
+Multilayer Perceptron Network with Weight Decay,"Classification, Regression","size, lambda, batch_size, lr, rho, decay, activation"
+Multilayer Perceptron Network with Weight Decay,Classification,"size, lambda, batch_size, lr, rho, decay, cost, activation"
+Multivariate Adaptive Regression Spline,"Classification, Regression","nprune, degree"
+Multivariate Adaptive Regression Splines,"Classification, Regression",degree
+Naive Bayes,Classification,"laplace, usekernel, adjust"
+Naive Bayes,Classification,"fL, usekernel, adjust"
+Naive Bayes Classifier,Classification,smooth
+Naive Bayes Classifier with Attribute Weighting,Classification,smooth
+Nearest Shrunken Centroids,Classification,threshold
+Negative Binomial Generalized Linear Model,Regression,link
+Neural Network,"Classification, Regression","layer1, layer2, layer3, learning.rate, momentum, dropout, activation"
+Neural Network,"Classification, Regression","layer1, layer2, layer3, dropout, beta1, beta2, learningrate, activation"
+Neural Network,Regression,"layer1, layer2, layer3"
+Neural Network,"Classification, Regression","size, decay"
+Neural Networks with Feature Extraction,"Classification, Regression","size, decay"
+Non-Convex Penalized Quantile Regression,Regression,"lambda, penalty"
+Non-Informative Model,"Classification, Regression",None
+Non-Negative Least Squares,Regression,None
+Oblique Random Forest,Classification,mtry
+Oblique Random Forest,Classification,mtry
+Oblique Random Forest,Classification,mtry
+Oblique Random Forest,Classification,mtry
+Optimal Weighted Nearest Neighbor Classifier,Classification,K
+Ordered Logistic or Probit Regression,Classification,method
+Parallel Random Forest,"Classification, Regression",mtry
+partDSA,"Classification, Regression","cut.off.growth, MPD"
+Partial Least Squares,"Classification, Regression",ncomp
+Partial Least Squares,"Classification, Regression",ncomp
+Partial Least Squares,"Classification, Regression",ncomp
+Partial Least Squares,"Classification, Regression",ncomp
+Partial Least Squares Generalized Linear Models,"Classification, Regression","nt, alpha.pvals.expli"
+Patient Rule Induction Method,Classification,"peel.alpha, paste.alpha, mass.min"
+Penalized Discriminant Analysis,Classification,lambda
+Penalized Discriminant Analysis,Classification,df
+Penalized Linear Discriminant Analysis,Classification,"lambda, K"
+Penalized Linear Regression,Regression,"lambda1, lambda2"
+Penalized Logistic Regression,Classification,"lambda, cp"
+Penalized Multinomial Regression,Classification,decay
+Penalized Ordinal Regression,Classification,"alpha, criteria, link"
+Polynomial Kernel Regularized Least Squares,Regression,"lambda, degree"
+Principal Component Analysis,Regression,ncomp
+Projection Pursuit Regression,Regression,nterms
+Quadratic Discriminant Analysis,Classification,None
+Quadratic Discriminant Analysis with Stepwise Feature Selection,Classification,"maxvar, direction"
+Quantile Random Forest,Regression,mtry
+Quantile Regression Neural Network,Regression,"n.hidden, penalty, bag"
+Quantile Regression with LASSO penalty,Regression,lambda
+Radial Basis Function Kernel Regularized Least Squares,Regression,"lambda, sigma"
+Radial Basis Function Network,"Classification, Regression",size
+Radial Basis Function Network,"Classification, Regression",negativeThreshold
+Random Ferns,Classification,depth
+Random Forest,"Classification, Regression","mtry, splitrule, min.node.size"
+Random Forest,"Classification, Regression","predFixed, minNode"
+Random Forest,"Classification, Regression",mtry
+Random Forest by Randomization,"Classification, Regression","mtry, numRandomCuts"
+Random Forest Rule-Based Model,"Classification, Regression","mtry, maxdepth"
+Regularized Discriminant Analysis,Classification,"gamma, lambda"
+Regularized Linear Discriminant Analysis,Classification,estimator
+Regularized Logistic Regression,Classification,"cost, loss, epsilon"
+Regularized Random Forest,"Classification, Regression","mtry, coefReg, coefImp"
+Regularized Random Forest,"Classification, Regression","mtry, coefReg"
+Relaxed Lasso,Regression,"lambda, phi"
+Relevance Vector Machines with Linear Kernel,Regression,None
+Relevance Vector Machines with Polynomial Kernel,Regression,"scale, degree"
+Relevance Vector Machines with Radial Basis Function Kernel,Regression,sigma
+Ridge Regression,Regression,lambda
+Ridge Regression with Variable Selection,Regression,"k, lambda"
+Robust Linear Discriminant Analysis,Classification,None
+Robust Linear Model,Regression,"intercept, psi"
+Robust Mixture Discriminant Analysis,Classification,"K, model"
+Robust Quadratic Discriminant Analysis,Classification,None
+Robust Regularized Linear Discriminant Analysis,Classification,"lambda, hp, penalty"
+Robust SIMCA,Classification,None
+ROC-Based Classifier,Classification,xgenes
+Rotation Forest,Classification,"K, L"
+Rotation Forest,Classification,"K, L, cp"
+Rule-Based Classifier,Classification,"NumOpt, NumFolds, MinWeights"
+Rule-Based Classifier,Classification,"threshold, pruned"
+Self-Organizing Maps,"Classification, Regression","xdim, ydim, user.weights, topo"
+Semi-Naive Structure Learner Wrapper,Classification,"k, epsilon, smooth, final_smooth, direction"
+Shrinkage Discriminant Analysis,Classification,"diagonal, lambda"
+SIMCA,Classification,None
+Simplified TSK Fuzzy Rules,Regression,"num.labels, max.iter"
+Single C5.0 Ruleset,Classification,None
+Single C5.0 Tree,Classification,None
+Single Rule Classification,Classification,None
+Sparse Distance Weighted Discrimination,Classification,"lambda, lambda2"
+Sparse Linear Discriminant Analysis,Classification,"NumVars, lambda"
+Sparse Mixture Discriminant Analysis,Classification,"NumVars, lambda, R"
+Sparse Partial Least Squares,"Classification, Regression","K, eta, kappa"
+Spike and Slab Regression,Regression,vars
+Stabilized Linear Discriminant Analysis,Classification,None
+Stabilized Nearest Neighbor Classifier,Classification,lambda
+Stacked AutoEncoder Deep Neural Network,"Classification, Regression","layer1, layer2, layer3, hidden_dropout, visible_dropout"
+Stochastic Gradient Boosting,"Classification, Regression","n.trees, interaction.depth, shrinkage, n.minobsinnode"
+Subtractive Clustering and Fuzzy c-Means Rules,Regression,"r.a, eps.high, eps.low"
+Supervised Principal Component Analysis,Regression,"threshold, n.components"
+Support Vector Machines with Boundrange String Kernel,"Classification, Regression","length, C"
+Support Vector Machines with Class Weights,Classification,"sigma, C, Weight"
+Support Vector Machines with Exponential String Kernel,"Classification, Regression","lambda, C"
+Support Vector Machines with Linear Kernel,"Classification, Regression",C
+Support Vector Machines with Linear Kernel,"Classification, Regression",cost
+Support Vector Machines with Polynomial Kernel,"Classification, Regression","degree, scale, C"
+Support Vector Machines with Radial Basis Function Kernel,"Classification, Regression","sigma, C"
+Support Vector Machines with Radial Basis Function Kernel,"Classification, Regression",C
+Support Vector Machines with Radial Basis Function Kernel,"Classification, Regression","sigma, C"
+Support Vector Machines with Spectrum String Kernel,"Classification, Regression","length, C"
+The Bayesian lasso,Regression,sparsity
+The lasso,Regression,fraction
+Tree Augmented Naive Bayes Classifier,Classification,"score, smooth"
+Tree Augmented Naive Bayes Classifier Structure Learner Wrapper,Classification,"k, epsilon, smooth, final_smooth, sp"
+Tree Augmented Naive Bayes Classifier with Attribute Weighting,Classification,"score, smooth"
+Tree Models from Genetic Algorithms,"Classification, Regression",alpha
+Tree-Based Ensembles,"Classification, Regression","maxinter, mode"
+Variational Bayesian Multinomial Probit Regression,Classification,estimateTheta
+Wang and Mendel Fuzzy Rules,Regression,"num.labels, type.mf"
+Weighted Subspace Random Forest,Classification,mtry
